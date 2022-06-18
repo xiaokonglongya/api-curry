@@ -3,16 +3,16 @@
  */
 
 const codeStatusEmun = {
-  200: Symbol("成功"),
-  500: Symbol("操作失败"),
-  404: Symbol("接口未找到"),
-  400: Symbol("参数错误"),
+  200: "成功",
+  500: "操作失败",
+  404: "接口未找到",
+  400: "参数错误",
 };
 
 /**
  * 公用的返回结果体
  */
- class BaseResponse {
+class BaseResponse {
   static code;
   static msg;
   static data;
@@ -27,12 +27,16 @@ const codeStatusEmun = {
     this.msg = msg;
     this.data = data;
   }
-  success(msg, data) {
-  return  new BaseResponse(200, msg ? msg : codeStatusEmun[200], data ? data : {});
+  success(data, msg = codeStatusEmun[200]) {
+    return new BaseResponse(200, msg, data ? data : {});
   }
   fail(msg, data = null) {
-   return new BaseResponse(400, msg ? msg : codeStatusEmun[400], data ? data : null);
+    return new BaseResponse(
+      400,
+      msg ? msg : codeStatusEmun[400],
+      data ? data : null
+    );
   }
 }
 
-module.exports = BaseResponse
+module.exports = BaseResponse;

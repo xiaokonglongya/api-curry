@@ -9,7 +9,6 @@ const BaseResponse = require("../../utils/baseResponse");
 router.get("/", async function (req, res, next) {
   let params = req.query;
   const { url = "" } = params;
-  let response = new BaseResponse();
   if (!url) {
     res.send(response.fail("缺少参数"));
   }
@@ -17,10 +16,10 @@ router.get("/", async function (req, res, next) {
     params: { url },
   });
   if (data?.code === 200) {
-    delete data.code
-    res.send(response.success(null, data));
+    delete data.code;
+    res.send(new BaseResponse().success(data));
   } else {
-    res.send(response.fail(data.msg));
+    res.send(new BaseResponse().fail(data.msg));
   }
 });
 
