@@ -7,6 +7,10 @@ router.post("/apitype", async function (req, res, next) {
   res.send(result);
 });
 
+router.get("/", async function (req, res, next) {
+  let result = await apicall.main(req);
+  res.send(result);
+});
 router.get("/apitype/:code", async function (req, res, next) {
   let result = await apicall.getOnceByCode(req);
   res.send(result);
