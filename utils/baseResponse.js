@@ -16,6 +16,7 @@ class BaseResponse {
   static code;
   static msg;
   static data;
+
   /**
    *
    * @param {*} code  200:成功
@@ -27,15 +28,11 @@ class BaseResponse {
     this.msg = msg;
     this.data = data;
   }
-  success(data, msg = codeStatusEmun[200]) {
-    return new BaseResponse(200, msg, data ? data : {});
+  success(data = {}, msg = codeStatusEmun[200]) {
+    return new BaseResponse(200, msg, data);
   }
-  fail(msg, data = null) {
-    return new BaseResponse(
-      400,
-      msg ? msg : codeStatusEmun[400],
-      data ? data : null
-    );
+  fail(msg = codeStatusEmun[400], data = null) {
+    return new BaseResponse(400, msg, data);
   }
 }
 
