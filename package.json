@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node  --experimental-wasm-threads --experimental-wasm-bulk-memory  ./bin/www",
+    "dev": "nodemon  --experimental-wasm-threads --experimental-wasm-bulk-memory ./bin/www "
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -17,6 +17,9 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@ffmpeg/core": "^0.10.0",
+    "@ffmpeg/ffmpeg": "^0.10.1",
+    "fluent-ffmpeg": "^2.1.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.16"
   }
