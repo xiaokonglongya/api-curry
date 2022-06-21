@@ -33,6 +33,15 @@ async function downfileToLoacal(filename, link, savePath) {
       });
   });
 }
+
+/**
+ * 获取文件名字
+ * https://ali2.a.kwimgs.com/ufile/adsocial/15133539-5d21-443d-9621-a6f9212f94b5.jpg
+ * a.yximgs.com/udata/music/music_7e2df54bcee147e79646486f4191b3390.jpg
+ */
+function getFileName(str) {
+  return str.split("/").pop().split(".")[0];
+}
 /**
  * 循环下载文件
  * @param {*} fileList
@@ -41,8 +50,7 @@ async function downfileToLoacal(filename, link, savePath) {
 async function loopDownFile(fileList, outpath) {
   if (!fileList.length) return true;
   let currFile = fileList.shift();
-  const fileName =
-    currFile.sort + "-" + currFile.link.split("_")[1].split(".")[0];
+  const fileName = currFile.sort + "-" + getFileName(currFile.link);
   await downfileToLoacal(fileName, currFile.link, outpath);
   return loopDownFile(fileList, outpath);
 }
